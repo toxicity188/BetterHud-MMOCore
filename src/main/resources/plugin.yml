@@ -1,0 +1,10 @@
+main: kr.toxicity.hud.addon.mmocore.BetterHudMMOCore
+version: ${version}
+name: BetterHudMMOCore
+api-version: 1.17
+author: toxicity
+load: POSTWORLD
+description: An addon of BetterHud supporting MMOCore
+depend:
+  - BetterHud
+  - MMOCore

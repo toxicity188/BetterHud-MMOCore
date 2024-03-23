@@ -1,0 +1,4 @@
+skill-group-name: "mmocore_skill"
+
+disable-when-non-casting-mode: false
+apply-index: false
