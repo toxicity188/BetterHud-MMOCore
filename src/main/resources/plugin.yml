@@ -7,4 +7,4 @@ load: POSTWORLD
 description: An addon of BetterHud supporting MMOCore
 depend:
   - BetterHud
-  - MMOCore
+  - MythicLib

@@ -13,12 +13,16 @@ import java.util.Map;
 import java.util.Optional;
 
 import static kr.toxicity.hud.addon.mmocore.util.PluginUtil.warn;
+import static kr.toxicity.hud.addon.mmocore.util.ConfigUtil.*;
 
 @Getter
 public final class ConfigManager implements Manager {
     private final Map<String, Popup> skillPopupMap = new HashMap<>();
+    private final Map<Integer, Integer> boundSkillIndexMap = new HashMap<>();
+    private final Map<Integer, Integer> weaponSkillIndexMap = new HashMap<>();
     private boolean disableWhenNonCastingMode = false;
     private boolean applyIndex = false;
+    private boolean reversed = false;
     private String skillGroupName = "mmocore_skill";
 
     @Override
@@ -32,10 +36,29 @@ public final class ConfigManager implements Manager {
         //config.yml
         var configFile = new File(FileUtil.getDataFolder(), "config.yml");
         if (!configFile.exists()) BetterHudMMOCore.getInstance().saveResource("config.yml", false);
+        boundSkillIndexMap.clear();
+        weaponSkillIndexMap.clear();
         try {
             var yaml = YamlConfiguration.loadConfiguration(configFile);
             disableWhenNonCastingMode = yaml.getBoolean("disable-when-non-casting-mode");
             applyIndex = yaml.getBoolean("apply-index");
+            reversed = yaml.getBoolean("reversed");
+            var boundSkill = yaml.getConfigurationSection("bound-skill-index");
+            if (boundSkill != null) forEachSubInt(boundSkill, (k, v) -> {
+                try {
+                    boundSkillIndexMap.put(Integer.parseInt(k), v);
+                } catch (NumberFormatException e) {
+                    warn("This is not a integer: " + k);
+                }
+            });
+            var weaponSkill = yaml.getConfigurationSection("weapon-skill-index");
+            if (weaponSkill != null) forEachSubInt(weaponSkill, (k, v) -> {
+                try {
+                    weaponSkillIndexMap.put(Integer.parseInt(k), v);
+                } catch (NumberFormatException e) {
+                    warn("This is not a integer: " + k);
+                }
+            });
             var skillGroupNameNullable = yaml.getString("skill-group-name");
             if (skillGroupNameNullable != null) skillGroupName = skillGroupNameNullable;
             else warn("You should define your skill group name!");

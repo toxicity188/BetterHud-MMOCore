@@ -1,11 +1,11 @@
 package kr.toxicity.hud.addon.mmocore;
 
+import kr.toxicity.hud.addon.mmocore.manager.CompatibilityManager;
 import kr.toxicity.hud.addon.mmocore.manager.ConfigManager;
 import kr.toxicity.hud.addon.mmocore.manager.Manager;
 import kr.toxicity.hud.addon.mmocore.manager.PlayerManager;
 import kr.toxicity.hud.api.event.PluginReloadedEvent;
 import lombok.Getter;
-import net.Indyuce.mmocore.api.MMOCoreAPI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,10 +23,12 @@ public final class BetterHudMMOCore extends JavaPlugin {
 
     private final ConfigManager configManager = new ConfigManager();
     private final PlayerManager playerManager = new PlayerManager();
+    private final CompatibilityManager compatibilityManager = new CompatibilityManager();
 
     private final List<Manager> managers = List.of(
             configManager,
-            playerManager
+            playerManager,
+            compatibilityManager
     );
 
     @Override
@@ -35,15 +37,12 @@ public final class BetterHudMMOCore extends JavaPlugin {
         instance = this;
     }
 
-    private MMOCoreAPI mmoCoreAPI;
-
     private void reload() {
         managers.forEach(Manager::reload);
     }
 
     @Override
     public void onEnable() {
-        mmoCoreAPI = new MMOCoreAPI(this);
         register(new Listener() {
             @EventHandler
             public void hudReload(@NotNull PluginReloadedEvent e) {

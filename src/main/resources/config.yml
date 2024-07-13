@@ -1,4 +1,8 @@
 skill-group-name: "mmocore_skill"
 
+reversed: false
 disable-when-non-casting-mode: false
 apply-index: false
+
+bound-skill-index: {}
+weapon-skill-index: {}
