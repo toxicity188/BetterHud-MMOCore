@@ -1,27 +1,24 @@
 package kr.toxicity.hud.addon.mmocore.player;
 
 import kr.toxicity.hud.addon.mmocore.BetterHudMMOCore;
-import kr.toxicity.hud.api.BetterHud;
 import kr.toxicity.hud.api.player.HudPlayer;
 import kr.toxicity.hud.api.popup.Popup;
 import kr.toxicity.hud.api.popup.PopupUpdater;
 import kr.toxicity.hud.api.scheduler.HudTask;
 import kr.toxicity.hud.api.update.UpdateEvent;
-import org.bukkit.entity.Player;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 import static kr.toxicity.hud.addon.mmocore.util.PluginUtil.*;
 
+@RequiredArgsConstructor
 public final class SkillPlayer {
     private Collection<Popup> popups = Collections.emptyList();
     private final List<PopupUpdater> updaters = new ArrayList<>();
     private final HudTask task = asyncTaskTimer(1, 1, this::update);
     private final HudPlayer hudPlayer;
-    public SkillPlayer(@NotNull Player player) {
-        hudPlayer = BetterHud.getInstance().getHudPlayer(player);
-    }
 
     public void update() {
         if (!BetterHudMMOCore.getInstance().getCompatibilityManager().isCasting(hudPlayer.getBukkitPlayer()) && BetterHudMMOCore.getInstance().getConfigManager().isDisableWhenNonCastingMode()) {

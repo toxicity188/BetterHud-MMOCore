@@ -1,9 +1,10 @@
 package kr.toxicity.hud.addon.mmocore.compatibility;
 
-import com.google.gson.*;
 import io.lumine.mythic.lib.MythicLib;
 import io.lumine.mythic.lib.api.item.ItemTag;
 import io.lumine.mythic.lib.api.item.SupportedNBTTagValues;
+import io.lumine.mythic.lib.gson.JsonElement;
+import io.lumine.mythic.lib.gson.JsonSyntaxException;
 import io.lumine.mythic.lib.skill.handler.SkillHandler;
 import io.lumine.mythic.lib.skill.trigger.TriggerType;
 import kr.toxicity.hud.addon.mmocore.BetterHudMMOCore;
@@ -94,7 +95,7 @@ public class MMOItemsCompatibility implements Compatibility {
         var list = new ArrayList<ComparableSkill>();
         if (jsonCompact != null && jsonCompact.getValue() instanceof String string) {
             try {
-                for (JsonElement e : JsonParser.parseString(string).getAsJsonArray()) {
+                for (JsonElement e : io.lumine.mythic.lib.gson.JsonParser.parseString(string).getAsJsonArray()) {
                     if (!e.isJsonObject()) continue;
                     var data = new AbilityData(e.getAsJsonObject());
                     list.add(new ComparableSkill(data.getHandler(), data.getTrigger()));
