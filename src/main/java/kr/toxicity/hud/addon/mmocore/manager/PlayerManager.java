@@ -1,8 +1,8 @@
 package kr.toxicity.hud.addon.mmocore.manager;
 
 import kr.toxicity.hud.addon.mmocore.player.SkillPlayer;
-import kr.toxicity.hud.api.event.HudPlayerJoinEvent;
-import kr.toxicity.hud.api.event.HudPlayerQuitEvent;
+import kr.toxicity.hud.api.bukkit.event.HudPlayerJoinEvent;
+import kr.toxicity.hud.api.bukkit.event.HudPlayerQuitEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;

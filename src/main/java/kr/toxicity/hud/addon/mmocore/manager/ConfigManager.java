@@ -2,7 +2,7 @@ package kr.toxicity.hud.addon.mmocore.manager;
 
 import kr.toxicity.hud.addon.mmocore.BetterHudMMOCore;
 import kr.toxicity.hud.addon.mmocore.util.FileUtil;
-import kr.toxicity.hud.api.BetterHud;
+import kr.toxicity.hud.api.BetterHudAPI;
 import kr.toxicity.hud.api.popup.Popup;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -83,7 +83,7 @@ public final class ConfigManager implements Manager {
             var yaml = YamlConfiguration.loadConfiguration(skillsFile);
             yaml.getKeys(false).forEach(k -> {
                 var popup = Optional.ofNullable(yaml.getString(k))
-                        .map(BetterHud.getInstance().getPopupManager()::getPopup)
+                        .map(BetterHudAPI.inst().getPopupManager()::getPopup)
                         .orElse(null);
                 if (popup == null) warn("This popup doesn't exist: " + k);
                 else skillPopupMap.put(k, popup);

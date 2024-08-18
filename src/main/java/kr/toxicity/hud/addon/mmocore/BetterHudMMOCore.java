@@ -4,7 +4,7 @@ import kr.toxicity.hud.addon.mmocore.manager.CompatibilityManager;
 import kr.toxicity.hud.addon.mmocore.manager.ConfigManager;
 import kr.toxicity.hud.addon.mmocore.manager.Manager;
 import kr.toxicity.hud.addon.mmocore.manager.PlayerManager;
-import kr.toxicity.hud.api.event.PluginReloadedEvent;
+import kr.toxicity.hud.api.bukkit.event.PluginReloadedEvent;
 import lombok.Getter;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

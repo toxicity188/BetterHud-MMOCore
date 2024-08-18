@@ -7,6 +7,7 @@ import kr.toxicity.hud.api.popup.PopupUpdater;
 import kr.toxicity.hud.api.scheduler.HudTask;
 import kr.toxicity.hud.api.update.UpdateEvent;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -21,12 +22,12 @@ public final class SkillPlayer {
     private final HudPlayer hudPlayer;
 
     public void update() {
-        if (!BetterHudMMOCore.getInstance().getCompatibilityManager().isCasting(hudPlayer.getBukkitPlayer()) && BetterHudMMOCore.getInstance().getConfigManager().isDisableWhenNonCastingMode()) {
+        if (!BetterHudMMOCore.getInstance().getCompatibilityManager().isCasting((Player) hudPlayer.handle()) && BetterHudMMOCore.getInstance().getConfigManager().isDisableWhenNonCastingMode()) {
             if (!updaters.isEmpty()) clear();
             return;
         }
         var skills = new TreeMap<Integer, Popup>(Comparator.naturalOrder());
-        BetterHudMMOCore.getInstance().getCompatibilityManager().apply(hudPlayer.getBukkitPlayer(), skills);
+        BetterHudMMOCore.getInstance().getCompatibilityManager().apply((Player) hudPlayer.handle(), skills);
         if (!contentEquals(popups, skills.values())) {
             clear();
             popups = skills.values();
