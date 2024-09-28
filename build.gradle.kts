@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "kr.toxicity.hud.addon.mmocore"
-version = "1.3"
+version = "1.4"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
-    compileOnly("com.github.toxicity188:BetterHud:5c8fd05248")
+    compileOnly("com.github.toxicity188:BetterHud:1.4")
     compileOnly("io.lumine:MythicLib-dist:1.6.2-SNAPSHOT")
     compileOnly("net.Indyuce:MMOCore-API:1.12.1-SNAPSHOT")
     compileOnly("net.Indyuce:MMOItems-API:6.10-SNAPSHOT")

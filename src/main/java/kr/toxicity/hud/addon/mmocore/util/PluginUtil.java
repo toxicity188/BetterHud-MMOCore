@@ -18,6 +18,9 @@ public class PluginUtil {
     public static @NotNull HudTask asyncTask(@NotNull Runnable runnable) {
         return BetterHudAPI.inst().bootstrap().scheduler().asyncTask(runnable);
     }
+    public static @NotNull HudTask taskLater(long delay, @NotNull Runnable runnable) {
+        return BetterHudAPI.inst().bootstrap().scheduler().taskLater(delay, runnable);
+    }
     public static @NotNull HudTask asyncTaskTimer(long delay, long period, @NotNull Runnable runnable) {
         return BetterHudAPI.inst().bootstrap().scheduler().asyncTaskTimer(delay, period, runnable);
     }

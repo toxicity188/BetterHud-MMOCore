@@ -43,7 +43,9 @@ public final class BetterHudMMOCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        register(new Listener() {
+        managers.forEach(Manager::start);
+        asyncTask(this::reload);
+        taskLater(1, () -> register(new Listener() {
             @EventHandler
             public void hudReload(@NotNull PluginReloadedEvent e) {
                 asyncTask(() -> {
@@ -51,8 +53,7 @@ public final class BetterHudMMOCore extends JavaPlugin {
                     info("BetterHud reload detected - reload complete.");
                 });
             }
-        });
-        managers.forEach(Manager::start);
+        }));
     }
 
     @Override
