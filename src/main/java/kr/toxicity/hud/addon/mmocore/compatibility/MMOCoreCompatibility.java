@@ -3,7 +3,6 @@ package kr.toxicity.hud.addon.mmocore.compatibility;
 import kr.toxicity.hud.addon.mmocore.BetterHudMMOCore;
 import kr.toxicity.hud.api.popup.Popup;
 import net.Indyuce.mmocore.MMOCore;
-import net.Indyuce.mmocore.api.MMOCoreAPI;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
