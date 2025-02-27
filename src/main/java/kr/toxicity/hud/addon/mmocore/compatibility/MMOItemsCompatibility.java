@@ -1,16 +1,14 @@
 package kr.toxicity.hud.addon.mmocore.compatibility;
 
-import io.lumine.mythic.lib.MythicLib;
-import io.lumine.mythic.lib.api.item.ItemTag;
-import io.lumine.mythic.lib.api.item.SupportedNBTTagValues;
-import io.lumine.mythic.lib.gson.JsonElement;
-import io.lumine.mythic.lib.gson.JsonSyntaxException;
+import io.lumine.mythic.lib.api.item.NBTItem;
 import io.lumine.mythic.lib.skill.handler.SkillHandler;
 import io.lumine.mythic.lib.skill.trigger.TriggerType;
 import kr.toxicity.hud.addon.mmocore.BetterHudMMOCore;
 import kr.toxicity.hud.api.popup.Popup;
 import net.Indyuce.mmoitems.ItemStats;
-import net.Indyuce.mmoitems.stat.data.AbilityData;
+import net.Indyuce.mmoitems.MMOItems;
+import net.Indyuce.mmoitems.api.item.mmoitem.LiveMMOItem;
+import net.Indyuce.mmoitems.stat.data.AbilityListData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -84,28 +82,11 @@ public class MMOItemsCompatibility implements Compatibility {
 
     @NotNull
     private List<ComparableSkill> getSkillFromItem(@NotNull ItemStack itemStack) {
-        var item = MythicLib.plugin.getVersion()
-                .getWrapper()
-                .getNBTItem(itemStack);
-        var relevantTags = new ArrayList<ItemTag>();
-        if (item.hasTag(ItemStats.ABILITIES.getNBTPath())) {
-            relevantTags.add(ItemTag.getTagAtPath(ItemStats.ABILITIES.getNBTPath(), item, SupportedNBTTagValues.STRING));
-        }
-        var jsonCompact = ItemTag.getTagAtPath(ItemStats.ABILITIES.getNBTPath(), relevantTags);
-        var list = new ArrayList<ComparableSkill>();
-        if (jsonCompact != null && jsonCompact.getValue() instanceof String string) {
-            try {
-                for (JsonElement e : io.lumine.mythic.lib.gson.JsonParser.parseString(string).getAsJsonArray()) {
-                    if (!e.isJsonObject()) continue;
-                    var data = new AbilityData(e.getAsJsonObject());
-                    list.add(new ComparableSkill(data.getHandler(), data.getTrigger()));
-                }
-            } catch (IllegalStateException | JsonSyntaxException ignored) {
-                //don't care
-            }
-        }
-        list.sort(Comparator.naturalOrder());
-        return list;
+        var nbt = NBTItem.get(itemStack);
+        if (MMOItems.getID(nbt) == null || MMOItems.getType(nbt) == null) return Collections.emptyList();
+        if (new LiveMMOItem(nbt).getData(ItemStats.ABILITIES) instanceof AbilityListData data) {
+            return data.getAbilities().stream().map(d -> new ComparableSkill(d.getHandler(), d.getTrigger())).toList();
+        } else return Collections.emptyList();
     }
 
     private class ComparableSkill implements Comparable<ComparableSkill> {
