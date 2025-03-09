@@ -22,6 +22,8 @@ public final class ConfigManager implements Manager {
     private final Map<Integer, Integer> weaponSkillIndexMap = new HashMap<>();
     private boolean disableWhenNonCastingMode = false;
     private boolean applyIndex = false;
+    private boolean enableMMOCore = true;
+    private boolean enableMMOItems = false;
     private boolean reversed = false;
     private String skillGroupName = "mmocore_skill";
 
@@ -43,6 +45,8 @@ public final class ConfigManager implements Manager {
             disableWhenNonCastingMode = yaml.getBoolean("disable-when-non-casting-mode");
             applyIndex = yaml.getBoolean("apply-index");
             reversed = yaml.getBoolean("reversed");
+            enableMMOCore = yaml.getBoolean("enable-mmocore");
+            enableMMOItems = yaml.getBoolean("enable-mmoitems");
             var boundSkill = yaml.getConfigurationSection("bound-skill-index");
             if (boundSkill != null) forEachSubInt(boundSkill, (k, v) -> {
                 try {

@@ -64,6 +64,7 @@ public class MMOItemsCompatibility implements Compatibility {
 
     @Override
     public void apply(@NotNull Player player, @NotNull Map<Integer, Popup> popupMap) {
+        if (!BetterHudMMOCore.getInstance().getConfigManager().isEnableMMOItems()) return;
         var configPopup = BetterHudMMOCore.getInstance()
                 .getConfigManager()
                 .getSkillPopupMap();

@@ -4,5 +4,8 @@ reversed: false
 disable-when-non-casting-mode: false
 apply-index: false
 
+enable-mmocore: true
+enable-mmoitems: false
+
 bound-skill-index: {}
 weapon-skill-index: {}

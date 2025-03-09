@@ -8,3 +8,5 @@ description: An addon of BetterHud supporting MMOCore
 depend:
   - BetterHud
   - MythicLib
+  - MMOCore
+  - MMOItems
