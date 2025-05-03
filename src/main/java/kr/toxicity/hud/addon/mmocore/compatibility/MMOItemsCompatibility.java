@@ -26,31 +26,6 @@ public class MMOItemsCompatibility implements Compatibility {
     }
 
     {
-
-        register(KILL_ENTITY);
-        register(KILL_PLAYER);
-        register(ATTACK);
-        register(DAMAGED);
-        register(DAMAGED_BY_ENTITY);
-        register(DEATH);
-        register(PLACE_BLOCK);
-        register(BREAK_BLOCK);
-        register(SHOOT_BOW);
-        register(ARROW_TICK);
-        register(ARROW_HIT);
-        register(ARROW_LAND);
-        register(SHOOT_TRIDENT);
-        register(TRIDENT_TICK);
-        register(TRIDENT_HIT);
-        register(TRIDENT_LAND);
-        register(LOGIN);
-        register(TELEPORT);
-        register(EQUIP_ARMOR);
-        register(UNEQUIP_ARMOR);
-        register(TIMER);
-        register(CAST);
-        register(API);
-
         register(LEFT_CLICK);
         register(RIGHT_CLICK);
         register(SHIFT_LEFT_CLICK);
@@ -75,7 +50,7 @@ public class MMOItemsCompatibility implements Compatibility {
         for (ComparableSkill ability : getSkillFromItem(player.getInventory().getItemInMainHand())) {
             var popup = configPopup.get(ability.handler.getId());
             if (popup != null) {
-                popupMap.put(weaponMap.getOrDefault(i, 0) + i, popup);
+                popupMap.put(weaponMap.getOrDefault(i, i) + i, popup);
             }
             i++;
         }

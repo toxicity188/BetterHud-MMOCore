@@ -28,7 +28,7 @@ public final class SkillPlayer {
         }
         var skills = new TreeMap<Integer, Popup>(Comparator.naturalOrder());
         BetterHudMMOCore.getInstance().getCompatibilityManager().apply((Player) hudPlayer.handle(), skills);
-        if (!contentEquals(popups, skills.values())) {
+        if (!identityEquals(popups, skills.values())) {
             clear();
             popups = skills.values();
             var applyIndex = BetterHudMMOCore.getInstance().getConfigManager().isApplyIndex();
@@ -57,12 +57,12 @@ public final class SkillPlayer {
     public void cancel() {
         task.cancel();
     }
-    private static <T> boolean contentEquals(@NotNull Collection<T> one, @NotNull Collection<T> two) {
+    private static <T> boolean identityEquals(@NotNull Collection<T> one, @NotNull Collection<T> two) {
         if (one.size() != two.size()) return false;
         var oneIterator = one.iterator();
         var twoIterator = two.iterator();
         for (int i = 0; i < one.size(); i++) {
-            if (!oneIterator.next().equals(twoIterator.next())) return false;
+            if (oneIterator.next() != twoIterator.next()) return false;
         }
         return true;
     }

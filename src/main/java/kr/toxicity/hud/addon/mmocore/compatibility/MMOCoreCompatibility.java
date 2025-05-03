@@ -34,7 +34,7 @@ public class MMOCoreCompatibility implements Compatibility {
             var i = skill.getSkillSlot().getSlot() - first;
             var popup = configPopup.get(skill.getClassSkill().getSkill().getHandler().getId());
             if (popup != null) {
-                popupMap.put(boundMap.getOrDefault(i, 0) + i, popup);
+                popupMap.put(boundMap.getOrDefault(i, i), popup);
             }
         }
     }
