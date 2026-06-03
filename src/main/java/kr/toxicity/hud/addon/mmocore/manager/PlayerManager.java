@@ -20,7 +20,7 @@ public class PlayerManager implements Manager {
         register(new Listener() {
             @EventHandler
             public void join(@NotNull HudPlayerJoinEvent e) {
-                skillPlayerMap.computeIfAbsent(e.getPlayer().getUniqueId(), uuid -> new SkillPlayer(e.getHudPlayer()));
+                skillPlayerMap.computeIfAbsent(e.getPlayer().getUniqueId(), uuid -> new SkillPlayer(e.player()));
             }
             @EventHandler
             public void quit(@NotNull HudPlayerQuitEvent e) {

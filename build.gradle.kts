@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "kr.toxicity.hud.addon.mmocore"
-version = "1.6"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
@@ -13,26 +13,24 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT")
-    implementation("io.github.toxicity188:BetterCommand:1.4.3")
-    implementation("io.github.toxicity188:BetterHud-standard-api:1.12.2")
-    implementation("io.github.toxicity188:BetterHud-bukkit-api:1.12.2")
+    compileOnly("org.spigotmc:spigot-api:26.1.2-R0.1-SNAPSHOT")
+    implementation("io.github.toxicity188:BetterHud-bukkit-api:2.0.0")
     compileOnly("io.lumine:MythicLib-dist:1.7.1-SNAPSHOT")
     compileOnly("net.Indyuce:MMOCore-API:1.13.1-SNAPSHOT")
     compileOnly("net.Indyuce:MMOItems-API:6.10.1-SNAPSHOT")
 
-    compileOnly("org.projectlombok:lombok:1.18.38")
-    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    compileOnly("org.projectlombok:lombok:1.18.46")
+    annotationProcessor("org.projectlombok:lombok:1.18.46")
 
-    testCompileOnly("org.projectlombok:lombok:1.18.38")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+    testCompileOnly("org.projectlombok:lombok:1.18.46")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.46")
 
-    testImplementation(platform("org.junit:junit-bom:5.11.4"))
+    testImplementation(platform("org.junit:junit-bom:6.0.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
 }
 
 tasks {
